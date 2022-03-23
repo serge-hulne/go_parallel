@@ -33,13 +33,12 @@ func Run_parallel(n_workers int, in chan int, out chan Result, Worker ParallelCa
 	}()
 }
 
+/*
+// Example of use:
 const (
 	NW = 8
 )
 
-// Example of use
-
-/*
 func main() {
 
 	in := make(chan int)
