@@ -37,6 +37,9 @@ const (
 	NW = 8
 )
 
+// Example of use
+
+/*
 func main() {
 
 	in := make(chan int)
@@ -57,3 +60,4 @@ func main() {
 
 	println("- - - All done - - -")
 }
+*/
