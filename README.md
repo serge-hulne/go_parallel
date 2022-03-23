@@ -5,6 +5,10 @@ Go library (wit generics) to run worker process in parallel (concurrently)
 ```
 // Example of use
 
+const (
+	NW = 8
+)
+
 func main() {
 	in := make(chan int)
 	out := make(chan Result)
