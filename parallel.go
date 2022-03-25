@@ -9,7 +9,7 @@ type ParallelCallback[T any] func(chan T, chan Result, int, *sync.WaitGroup)
 
 type Result struct {
 	id  int
-	val int
+	val T
 }
 
 func Run_parallel(n_workers int, in chan int, out chan Result, Worker ParallelCallback[int]) {
