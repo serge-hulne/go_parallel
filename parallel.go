@@ -12,14 +12,6 @@ type Result struct {
 	val int
 }
 
-func Worker(in chan int, out chan Result, id int, wg *sync.WaitGroup) {
-	defer wg.Done()
-	for item := range in {
-		item *= 2 // returns the double of the input value (Bogus handling of data)
-		out <- Result{id, item}
-	}
-}
-
 func Run_parallel(n_workers int, in chan int, out chan Result, Worker ParallelCallback[int]) {
 
 	go func() {
@@ -38,6 +30,14 @@ func Run_parallel(n_workers int, in chan int, out chan Result, Worker ParallelCa
 const (
 	NW = 8
 )
+
+func Worker(in chan int, out chan Result, id int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for item := range in {
+		item *= 2 // returns the double of the input value (Bogus handling of data)
+		out <- Result{id, item}
+	}
+}
 
 func main() {
 
