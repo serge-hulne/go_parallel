@@ -5,8 +5,19 @@ Go library (wit generics) to run worker process in parallel (concurrently)
 ```
 // Example of use
 
+package main
+
+import (
+	"fmt"
+	"sync"
+
+	. "github.com/serge-hulne/go_parallel"
+)
+
+// Example of use:
 const (
-	NW = 8
+	NW         = 8
+	BufferSize = 1
 )
 
 func Worker(in chan int, out chan Result[int], id int, wg *sync.WaitGroup) {
@@ -18,19 +29,28 @@ func Worker(in chan int, out chan Result[int], id int, wg *sync.WaitGroup) {
 }
 
 func main() {
-	in := make(chan int)
+
+	// in and out channels:
+	in := make(chan int, BufferSize)
 	out := make(chan Result[int])
+
+	// Populate in channel (send data to input stream)
 	go func() {
 		defer close(in)
 		for i := 0; i < 10; i++ {
 			in <- i
 		}
 	}()
+
+	// Run tasks (Worker func) in parallel:
 	Run_parallel(NW, in, out, Worker)
+
+	// Display results:
 	for item := range out {
-		fmt.Printf("From out [%d]: %d\n", item.id, item.val)
+		fmt.Printf("From out [%d]: %d\n", item.Id, item.Value)
 	}
 	println("- - - All done - - -")
 }
+
 ```
 
