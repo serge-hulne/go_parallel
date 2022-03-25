@@ -5,14 +5,14 @@ import (
 	"sync"
 )
 
-type ParallelCallback[T any] func(chan T, chan Result, int, *sync.WaitGroup)
+type ParallelCallback[T any] func(chan T, chan Result, wg *sync.WaitGroup)
 
 type Result struct {
 	id  int
 	val T
 }
 
-func Run_parallel(n_workers int, in chan int, out chan Result, Worker ParallelCallback[int]) {
+func Run_parallel(n_workers int, in chan int, out chan Result, Worker ParallelCallback[T]) {
 
 	go func() {
 		wg := sync.WaitGroup{}
