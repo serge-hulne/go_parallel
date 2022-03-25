@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-type ParallelCallback[T any] func(chan T, chan Result, wg *sync.WaitGroup)
+type ParallelCallback[T any] func(chan T, chan Result, id int, wg *sync.WaitGroup)
 
 type Result struct {
 	id  int
