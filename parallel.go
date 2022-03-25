@@ -12,7 +12,7 @@ type Result[T any] struct {
 	val T
 }
 
-func Run_parallel(n_workers int, in chan int, out chan Result, Worker ParallelCallback[T]) {
+func Run_parallel [T any](n_workers int, in chan T, out chan Result, Worker ParallelCallback[T]) {
 
 	go func() {
 		wg := sync.WaitGroup{}
