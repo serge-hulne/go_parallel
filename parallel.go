@@ -1,4 +1,4 @@
-package go_parallel
+package "github.com/serge-hulne/go_parallel"
 
 import (
 	"sync"
